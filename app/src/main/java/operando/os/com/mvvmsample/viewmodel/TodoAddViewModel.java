@@ -2,6 +2,7 @@ package operando.os.com.mvvmsample.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;
+import android.databinding.ObservableField;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -9,9 +10,11 @@ import android.text.TextWatcher;
 public class TodoAddViewModel extends BaseObservable {
 
     public ObservableBoolean isEnable;
+    public ObservableField<String> title;
 
     public TodoAddViewModel() {
         isEnable = new ObservableBoolean(false);
+        title = new ObservableField<>("");
     }
 
     public TextWatcher getTodoEditTextWatcher() {
@@ -27,7 +30,9 @@ public class TodoAddViewModel extends BaseObservable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                isEnable.set(!TextUtils.isEmpty(editable.toString()));
+                String title = editable.toString();
+                TodoAddViewModel.this.title.set(title);
+                isEnable.set(!TextUtils.isEmpty(title));
             }
         };
     }
