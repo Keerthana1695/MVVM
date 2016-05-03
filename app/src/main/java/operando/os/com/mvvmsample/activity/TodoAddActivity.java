@@ -11,6 +11,7 @@ import operando.os.com.mvvmsample.R;
 import operando.os.com.mvvmsample.TodoDataRepository;
 import operando.os.com.mvvmsample.databinding.ActivityTodoAddBinding;
 import operando.os.com.mvvmsample.model.Todo;
+import operando.os.com.mvvmsample.viewmodel.TodoAddViewModel;
 
 public class TodoAddActivity extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class TodoAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final ActivityTodoAddBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_todo_add);
+        TodoAddViewModel viewModel = new TodoAddViewModel();
+        binding.setViewModel(viewModel);
         binding.todoSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
