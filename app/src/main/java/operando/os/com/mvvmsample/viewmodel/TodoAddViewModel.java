@@ -10,7 +10,7 @@ import android.view.View;
 
 import operando.os.com.mvvmsample.TodoDataRepository;
 import operando.os.com.mvvmsample.messenger.Messenger;
-import operando.os.com.mvvmsample.messenger.TodoAddCompleteMessenger;
+import operando.os.com.mvvmsample.messenger.TodoAddCompleteMessage;
 import operando.os.com.mvvmsample.model.Todo;
 
 public class TodoAddViewModel extends BaseObservable {
@@ -46,8 +46,9 @@ public class TodoAddViewModel extends BaseObservable {
     }
 
     public void addTodo(View v) {
+        // TODO: Modelの仕事をしてしまってるので、Modelに別途切り分ける
         Todo todo = new Todo(title.get(), false);
         TodoDataRepository.add(todo);
-        messenger.send(new TodoAddCompleteMessenger());
+        messenger.send(new TodoAddCompleteMessage());
     }
 }

@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import operando.os.com.mvvmsample.R;
 import operando.os.com.mvvmsample.databinding.ActivityTodoAddBinding;
-import operando.os.com.mvvmsample.messenger.TodoAddCompleteMessenger;
+import operando.os.com.mvvmsample.messenger.TodoAddCompleteMessage;
 import operando.os.com.mvvmsample.viewmodel.TodoAddViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -30,11 +30,11 @@ public class TodoAddActivity extends AppCompatActivity {
         TodoAddViewModel viewModel = new TodoAddViewModel();
 
         subscriptions.add(
-                viewModel.messenger.register(TodoAddCompleteMessenger.class)
+                viewModel.messenger.register(TodoAddCompleteMessage.class)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action1<TodoAddCompleteMessenger>() {
+                        .subscribe(new Action1<TodoAddCompleteMessage>() {
                             @Override
-                            public void call(TodoAddCompleteMessenger messenger) {
+                            public void call(TodoAddCompleteMessage messenger) {
                                 setResult(RESULT_OK);
                                 finish();
                             }
@@ -48,7 +48,5 @@ public class TodoAddActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         subscriptions.unsubscribe();
-
-
     }
 }
